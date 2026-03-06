@@ -48,21 +48,25 @@
             width: 100%;
         }
 
-        /* Container für das fixierte Profilbild */
         .profile-image-wrapper {
             position: relative;
             width: 100%;
-            aspect-ratio: 4 / 5;
-            background-color: #f1f5f9;
+            height: auto;
+            min-height: 400px;
+            aspect-ratio: 2 / 3;
+            background-color: #f8fafc;
             overflow: hidden;
             border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #profile-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 20%; 
+            object-position: center center; 
             display: block;
         }
 
@@ -71,9 +75,39 @@
             background: linear-gradient(90deg, transparent, #1a0b2e, transparent);
         }
 
-        /* Verhindert horizontales Scrollen auf Mobilgeräten */
         html, body {
             overflow-x: hidden;
+            width: 100%;
+        }
+
+        .hyphens-auto {
+            hyphens: auto;
+            word-wrap: break-word;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(26, 11, 46, 0.95);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 40px;
+            border: none;
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 2px;
         }
     </style>
 </head>
@@ -94,7 +128,6 @@
                     Kontakt
                 </a>
             </div>
-            <!-- Mobile Kontakt Button (nur sichtbar wenn Desktop-Nav versteckt) -->
             <div class="md:hidden">
                 <a href="#kontakt" class="text-[10px] font-bold uppercase tracking-widest border border-white/20 px-4 py-2">Kontakt</a>
             </div>
@@ -167,22 +200,25 @@
 
     <!-- Über mich Sektion -->
     <section id="ueber-mich" class="py-20 md:py-32 px-6 bg-white overflow-hidden">
-        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
-            <div class="relative px-4 sm:px-0">
-                <div class="profile-image-wrapper shadow-2xl grayscale hover:grayscale-0 transition-all duration-1000">
-                    <img id="profile-img" src="Profil1.jpg" alt="Oliver Zwarnig" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'flex flex-col items-center justify-center h-full text-slate-400 p-8 text-center\'><i class=\'fas fa-image mb-4 text-4xl\'></i><p class=\'text-xs font-bold uppercase tracking-widest\'>Foto Profil1.jpg nicht im Ordner gefunden</p></div>'">
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-24 items-start">
+            <div class="relative w-full max-w-sm mx-auto lg:max-w-none order-1 lg:order-1">
+                <div class="profile-image-wrapper shadow-2xl grayscale hover:grayscale-0 transition-all duration-1000 border border-slate-100">
+                    <img id="profile-img" src="Profil1.jpg" alt="Oliver Zwarnig" class="w-full h-full" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'flex flex-col items-center justify-center h-full text-slate-400 p-8 text-center bg-slate-50\'><i class=\'fas fa-user-tie mb-4 text-5xl\'></i><p class=\'text-[10px] font-bold uppercase tracking-widest leading-relaxed\'>Foto Profil1.jpg <br> wird geladen</p></div>'">
                 </div>
-                <div class="absolute -bottom-4 md:-bottom-6 -right-2 md:-right-6 w-24 md:w-32 h-24 md:h-32 bg-[#1a0b2e] -z-10"></div>
+                <div class="absolute -bottom-4 -right-4 w-20 md:w-32 h-20 md:h-32 bg-[#1a0b2e] -z-10"></div>
             </div>
-            <div>
+            
+            <div class="w-full order-2 lg:order-2 mt-12 lg:mt-0">
                 <div class="brand-font text-slate-400 text-[10px] mb-6 tracking-[0.4em]">Expertise & Vision</div>
-                <h2 class="text-3xl md:text-4xl font-black text-[#1a0b2e] mb-8 md:mb-10 leading-tight">Strategische <br class="hidden md:block">Vertriebsunterstützung.</h2>
+                <h2 class="text-2xl xs:text-3xl md:text-4xl font-black text-[#1a0b2e] mb-8 md:mb-10 leading-tight hyphens-auto">
+                    Strategische <br class="hidden sm:block">Vertriebsunterstützung.
+                </h2>
                 <div class="space-y-6 md:space-y-8 text-slate-600 text-base md:text-lg leading-relaxed font-light">
                     <p>
                         Ich verstehe mich nicht als externer Dienstleister, sondern als strategischer Arm deines Unternehmens. Meine Expertise setzt dort an, wo technische Exzellenz auf komplexe Märkte trifft.
                     </p>
                     <p>
-                        Ich begleite den gesamten Prozess: Von der initialen technischen Analyse über das Schnittstellenmanagement bis hin zur Platzierung bei Key-Accounts. Dabei verbinde ich tiefes Systemverständnis mit einer zielgerichteten Kommunikation, die Entscheider überzeugt.
+                        Ich begleite den gesamten Prozess: Von der initialen Marktanalyse über das Schnittstellenmanagement bis hin zur Platzierung bei Key-Accounts. Dabei verbinde ich tiefes Systemverständnis mit einer zielgerichteten Kommunikation, die Entscheider überzeugt.
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
                         <div class="border-l-2 border-[#1a0b2e] pl-4">
@@ -190,8 +226,8 @@
                             <div class="text-sm font-bold text-[#1a0b2e]">Marktetablierung</div>
                         </div>
                         <div class="border-l-2 border-[#1a0b2e] pl-4">
-                            <div class="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-1">Beratung</div>
-                            <div class="text-sm font-bold text-[#1a0b2e]">Technische Analyse</div>
+                            <div class="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-1">Support</div>
+                            <div class="text-sm font-bold text-[#1a0b2e]">Vertriebssteuerung</div>
                         </div>
                         <div class="border-l-2 border-[#1a0b2e] pl-4">
                             <div class="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-1">Fokus</div>
@@ -235,11 +271,86 @@
                 &copy; 2026 Strategy & Technical Sales.
             </div>
             <div class="flex space-x-6 md:space-x-8 text-[9px] font-bold uppercase tracking-[0.2em] order-2 md:order-3">
-                <a href="#" class="text-slate-400 hover:text-[#1a0b2e] transition">Impressum</a>
-                <a href="#" class="text-slate-400 hover:text-[#1a0b2e] transition">Datenschutz</a>
+                <button onclick="toggleModal('impressum-modal')" class="text-slate-400 hover:text-[#1a0b2e] transition">Impressum</button>
+                <button onclick="toggleModal('datenschutz-modal')" class="text-slate-400 hover:text-[#1a0b2e] transition">Datenschutz</button>
             </div>
         </div>
     </footer>
 
+    <!-- Impressum Modal -->
+    <div id="impressum-modal" class="modal">
+        <div class="modal-content text-left">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-xl font-black text-[#1a0b2e]">Impressum</h3>
+                <button onclick="toggleModal('impressum-modal')" class="text-slate-400 hover:text-[#1a0b2e] text-2xl">&times;</button>
+            </div>
+            <div class="space-y-4 text-sm text-slate-600 leading-relaxed font-light">
+                <p><strong class="text-[#1a0b2e] font-bold block uppercase tracking-widest text-[10px] mb-1">Inhaber</strong>
+                Oliver Zwarnig</p>
+                
+                <p><strong class="text-[#1a0b2e] font-bold block uppercase tracking-widest text-[10px] mb-1">Anschrift</strong>
+                Dürrenmoos 55<br>
+                9111 Völkermarkt<br>
+                Österreich</p>
+                
+                <p><strong class="text-[#1a0b2e] font-bold block uppercase tracking-widest text-[10px] mb-1">Kontakt</strong>
+                E-Mail: <a href="mailto:office@oliver-zwarnig.com" class="text-[#1a0b2e] font-medium underline">office@oliver-zwarnig.com</a><br>
+                Tel: +43 677 63672662</p>
+                
+                <p><strong class="text-[#1a0b2e] font-bold block uppercase tracking-widest text-[10px] mb-1">Unternehmensgegenstand</strong>
+                Strategische Vertriebsunterstützung</p>
+                
+                <p><strong class="text-[#1a0b2e] font-bold block uppercase tracking-widest text-[10px] mb-1">GLN</strong>
+                9110037130999</p>
+                
+                <p><strong class="text-[#1a0b2e] font-bold block uppercase tracking-widest text-[10px] mb-1">Aufsichtsbehörde</strong>
+                Bezirkshauptmannschaft Völkermarkt</p>
+                
+                <p class="pt-4 border-t border-slate-100">Informationen zur Online-Streitbeilegung: Verbraucher haben die Möglichkeit, Beschwerden an die Online-Streitbeilegungsplattform der EU zu richten: http://ec.europa.eu/odr.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Datenschutz Modal -->
+    <div id="datenschutz-modal" class="modal">
+        <div class="modal-content text-left">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-xl font-black text-[#1a0b2e]">Datenschutz</h3>
+                <button onclick="toggleModal('datenschutz-modal')" class="text-slate-400 hover:text-[#1a0b2e] text-2xl">&times;</button>
+            </div>
+            <div class="space-y-4 text-sm text-slate-600 leading-relaxed font-light">
+                <p>Der Schutz deiner persönlichen Daten ist mir ein besonderes Anliegen. Ich verarbeite deine Daten daher ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO, TKG 2003).</p>
+                
+                <p><strong class="text-[#1a0b2e] font-bold block uppercase tracking-widest text-[10px] mb-1">Kontakt mit mir</strong>
+                Wenn du per E-Mail oder WhatsApp Kontakt mit mir aufnimmst, werden deine angegebenen Daten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen gespeichert. Diese Daten gebe ich nicht ohne deine Einwilligung weiter.</p>
+                
+                <p><strong class="text-[#1a0b2e] font-bold block uppercase tracking-widest text-[10px] mb-1">Cookies & Analyse</strong>
+                Diese Website ist auf maximale Privatsphäre ausgelegt und verwendet standardmäßig keine Tracking-Cookies oder Analysetools von Drittanbietern.</p>
+                
+                <p><strong class="text-[#1a0b2e] font-bold block uppercase tracking-widest text-[10px] mb-1">Deine Rechte</strong>
+                Dir stehen grundsätzlich die Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit, Widerruf und Widerspruch zu.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            if (modal.style.display === "block") {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
+            } else {
+                modal.style.display = "block";
+                document.body.style.overflow = "hidden";
+            }
+        }
+
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+    </script>
 </body>
 </html>
